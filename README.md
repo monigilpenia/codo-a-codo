@@ -1,14 +1,11 @@
-![image](./images/../img/PaginaVeterinariaLocky.png)
-
 # Python Full Stack Developer 
 
 
-## CodoaCodo-PrimerTP
+## CodoaCodo - PrimerTP
 Trabajamos sobre el primer proyecto con HTML, Css y Java Script
 
 ### Proyecto "Veterinaria Locky"
-
-:point_right: Comisión 23513 - grupo 11:
+Comisión 23513 - grupo 11:
 
 :small_orange_diamond: Johan, Matamoros 
 

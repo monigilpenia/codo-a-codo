@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Incluimos los archivos css-->
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/style_turnos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <!-- Incluimos los archivos de tipos de fuentes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bellota+Text:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        /* Agrega tus estilos CSS personalizados aquí */
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <title>Veterinaria Locky</title>
+  </head>
+  <body>
+    <!-- Header del sitio -->
+    <header class="encabezado">
+      <!-- Contenido de la primera columna del header: logo de la veterinaria-->
+      <div class="column-header-i">
+        <img src="img/logo5.png" alt="Logo de Veterinaria Locky" class="logo" />
+        <h1>Veterinaria Locky</h1>
+      </div>
+      <!-- Contenido de la segunda columna del header: nav-->
+      <div class="column-header">
+        <nav>
+          <a href="index.html">Inicio</a> |
+          <a href="servicios.html">Servicios</a> |
+          <a href="nosotros.html">Nosotros</a> |
+          <a href="contacto.html">Contacto</a> |
+            <a href="turnos.html">Turno</a>
+        </nav>
+      </div>
+      <!-- Contenido de la tercera columna del header: login-->
+      <div class="column-header-d">
+        <p><i class="fa fa-sign-in-alt"></i> Login</p>
+      </div>
+    </header>
+    <!-- Carrusel donde lo colocamos dentro de un DIV y lo hacemos con el formato de lista -->
+    <div class="carousel">
+      <ul class="images">
+        <li>
+          <img src="img/mascotas3-3.jpg" alt="Img 1" class="active" />
+        </li>
+        <li>
+          <img src="img/mascotas3-2.jpg" alt="Img 2" />
+        </li>
+        <li>
+          <img src="img/mascotas.jpg" alt="Img 3" />
+        </li>
+        <li>
+          <img src="img/mascotas3-1.jpg" alt="Img 4" />
+        </li>
+      </ul>
+    </div>
+    <!-- Sección divisoria -->
+    <div class="medio"></div>
+    <!-- Contenido de la página principal (servicios.html) -->
+    <div class="main-content">
+      <h2>Datos de registro</h2>
+      <!-- Contenido de tarjetas de servicios -->
+        <div class="card-container">
+            <div class="card-grid">
+                <!-- Agrega esta sección en tu formulario HTML -->
+                <div id="app" class="container mt-5">
+                    <!-- Formulario de Registro de Persona -->
+                    <form @submit.prevent="registrarPersona">
+                        <div class="form-group">
+                            <label for="user">Nombre de usuario:</label>
+                            <input v-model="persona.user" type="text" class="form-control" id="user" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Nombre:</label>
+                            <input v-model="persona.name" type="text" class="form-control" id="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apellido">Apellido:</label>
+                            <input v-model="persona.apellido" type="text" class="form-control" id="apellido" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="correo">Corre electrónico:</label>
+                            <input v-model="persona.correo" type="email" class="form-control" id="correo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono">Telefono:</label>
+                            <input v-model="persona.telefono" type="tel" class="form-control" id="telefono" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="direccion">Dirección:</label>
+                            <input v-model="persona.direccion" type="text" class="form-control" id="direccion" required>
+                        </div>
+                
+                        <!-- Botón para agregar mascota -->
+                        <button type="button" class="btn btn-primary" @click="mostrarModal">Agregar Mascota</button>
+                
+                        <!-- Modal de Registro de Mascota -->
+                        <div class="modal" id="mascotaModal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Contenido del modal -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Registro de Mascota</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Formulario de Registro de Mascota -->
+                                        <form @submit.prevent="registrarMascota">
+                                            <div class="form-group">
+                                                <label for="nombreMascota">Nombre de la Mascota:</label>
+                                                <input v-model="mascota.nombre" type="text" class="form-control" id="nombreMascota" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="raza">Raza:</label>
+                                                <input v-model="mascota.raza" type="text" class="form-control" id="raza" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="color">Color / Pelaje:</label>
+                                                <input v-model="mascota.color" type="text" class="form-control" id="color" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="edad">Edad de la mascota:</label>
+                                                <input v-model="mascota.edad" type="int" class="form-control" id="edad" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="fecha">Fecha de nacimiento:</label>
+                                                <input v-model="mascota.fecha" type="date" class="form-control" id="fecha" required>
+                                            </div>
+
+
+                                            <!-- Botones del formulario de mascota -->
+                                            <button type="button" class="btn btn-success" @click="guardarMascota">Guardar</button>
+                                            <button type="button" class="btn btn-secondary" @click="cerrarModal">Cancelar</button>
+                                            <button type="button" class="btn btn-primary" @click="agregarOtraMascota">Agregar más Mascotas</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Botones del formulario de persona -->
+                        <button type="submit" class="btn btn-primary mt-3">Registrar Persona</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sección del footer -->
+    <footer class="pie">
+      <!-- Datos de contacto -->
+      <div>
+        <p class="contenedor-navegador-footer">
+          <i class="fa fa-phone-alt"></i> Teléfono:(123) 456-7890
+        </p>
+        <p class="contenedor-navegador-footer">
+          <i class="fa fa-envelope"></i>
+          <a href="mailto:info@mimascota.com?subject=Consulta%de%servicio"
+            >info@veterinarialocky.com</a
+          >
+        </p>
+        <p class="contenedor-navegador-footer">
+          <i class="fa fa-location-arrow"></i>
+          <a
+            href="https://www.google.com/maps/place/Buenos+Aires,+CABA/@-34.6158238,-58.4332985,12z/data=!3m1!4b1!4m6!3m5!1s0x95bcca3b4ef90cbd:0xa0b3812e88e88e87!8m2!3d-34.6036844!4d-58.3815591!16zL20vMDFseTVt?entry=ttu"
+            target="_blank"
+            onclick="window.open(this.href); return false;"
+          >
+            Donde encontrarnos</a>
+        </p>
+      </div>
+      <!-- Redes sociales -->
+      <div>
+        <p class="contenedor-navegador-footer">
+          Seguinos en:
+          <a href="">
+            <i class="fab fa-facebook"></i>
+          </a>
+          |
+          <a href="">
+            <i class="fab fa-instagram"></i>
+          </a>
+          |
+          <a href="">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </p>
+      </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="/js/servicios.js"></script>
+    <script src="/js/carousel.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                persona: {
+                    user: '',
+                    name: '',
+                    apellido: '',
+                    correo: '',
+                    telefono: '',
+                    direccion: '',
+                    mascotas: []
+                },
+                mascota: {
+                    nombre: '',
+                    raza: '',
+                    color: '',
+                    edad: '',
+                    fecha: ''
+                },
+                mostrarFormMascota: false
+            },
+            methods: {
+                registrarPersona() {
+                    console.log('Persona registrada:', this.persona);
+                    // Aquí podrías realizar una solicitud HTTP para enviar la información al servidor
+                },
+                mostrarModal() {
+                    // Mostrar el modal de mascota
+                    $('#mascotaModal').modal('show');
+                },
+                cerrarModal() {
+                    // Cerrar el modal de mascota
+                    $('#mascotaModal').modal('hide');
+                },
+                registrarMascota() {
+                    // Puedes realizar validaciones adicionales antes de agregar la mascota
+                    this.persona.mascotas.push({ nombre: this.mascota.nombre });
+                    // Cerrar el modal después de registrar la mascota
+                    this.cerrarModal();
+                    // Limpiar el formulario de mascota
+                    this.mascota.nombre = '';
+                },
+                guardarMascota() {
+                    // Puedes realizar acciones adicionales antes de guardar la mascota
+                    console.log('Mascota guardada:', this.mascota);
+                },
+                cancelarMascota() {
+                    // Cerrar el modal de mascota si se cancela
+                    this.cerrarModal();
+                    // Limpiar el formulario de mascota
+                    this.mascota.nombre = '';
+                },
+                agregarOtraMascota() {
+                    // Puedes realizar acciones adicionales antes de agregar otra mascota
+                    // Limpiar el formulario de mascota
+                    this.mascota.nombre = '';
+                }
+            }
+        });
+    </script>
+    <!-- Agrega los scripts de Bootstrap al final del cuerpo del documento -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
